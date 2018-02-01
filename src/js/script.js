@@ -1,7 +1,7 @@
 
 const targetPlace = {
   lat: 35.648202,
-  lng: 139.71149,
+  lng: 139.70149,
 };
 
 const directionsService = new google.maps.DirectionsService;

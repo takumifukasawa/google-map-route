@@ -2349,7 +2349,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var targetPlace = {
   lat: 35.648202,
-  lng: 139.71149
+  lng: 139.70149
 };
 
 var directionsService = new google.maps.DirectionsService();
