@@ -111,8 +111,9 @@ const map = new google.maps.Map(document.getElementById('map'), {
 });
 directionsDisplay.setMap(map);
 
-//startInput.addEventListener('click', () => {
-//});
+startInput.addEventListener('click', () => {
+  searchRoute();
+});
   
 searchRoute();
 
