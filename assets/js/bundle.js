@@ -2259,38 +2259,71 @@ var getGeocode = function () {
   };
 }();
 
-var searchRoute = function () {
+var getCurrentGeocode = function () {
   var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
-    var startKeyword, startGeocode, startLocation, nearestStation;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
+            return _context4.abrupt('return', new _promise2.default(function (resolve) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+                resolve({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                });
+              }, function () {});
+            }));
+
+          case 1:
+          case 'end':
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this);
+  }));
+
+  return function getCurrentGeocode() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
+var searchRoute = function () {
+  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+    var startLocation, nearestStation;
+    return _regenerator2.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
             console.log("--- search start ---");
 
-            startKeyword = startInput.value;
-
+            /*
+            const startKeyword = startInput.value;
             console.log("start keyword:");
-            console.log(startKeyword);
-
-            _context4.next = 6;
-            return getGeocode(startKeyword);
-
-          case 6:
-            startGeocode = _context4.sent;
-
+            console.log(startKeyword)
+            
+            const startGeocode = await getGeocode(startKeyword);
             console.log("start geocode:");
-            console.log(startGeocode);
+            console.log(startGeocode)
+             const startLocation = startGeocode.geometry.location;
+            console.log(startLocation)
+             const nearestStation = await getNearestStation(startGeocode.geometry.location);
+            console.log("nearest station:");
+            console.log(nearestStation)
+            */
 
-            startLocation = startGeocode.geometry.location;
+            _context5.next = 3;
+            return getCurrentGeocode();
+
+          case 3:
+            startLocation = _context5.sent;
 
             console.log(startLocation);
 
-            _context4.next = 13;
-            return getNearestStation(startGeocode.geometry.location);
+            _context5.next = 7;
+            return getNearestStation(startLocation);
 
-          case 13:
-            nearestStation = _context4.sent;
+          case 7:
+            nearestStation = _context5.sent;
 
             console.log("nearest station:");
             console.log(nearestStation);
@@ -2299,16 +2332,16 @@ var searchRoute = function () {
 
             console.log("--- search end ---");
 
-          case 18:
+          case 12:
           case 'end':
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4, this);
+    }, _callee5, this);
   }));
 
   return function searchRoute() {
-    return _ref4.apply(this, arguments);
+    return _ref5.apply(this, arguments);
   };
 }();
 

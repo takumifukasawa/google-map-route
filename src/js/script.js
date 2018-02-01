@@ -59,9 +59,24 @@ async function getGeocode(address) {
   });
 }
 
+async function getCurrentGeocode() {
+  return new Promise(resolve => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });  
+      },
+	  	() => {},
+    );
+  });
+}
+
 async function searchRoute() {
   console.log("--- search start ---");
-  
+
+  /*
   const startKeyword = startInput.value;
   console.log("start keyword:");
   console.log(startKeyword)
@@ -69,11 +84,19 @@ async function searchRoute() {
   const startGeocode = await getGeocode(startKeyword);
   console.log("start geocode:");
   console.log(startGeocode)
-  
+
   const startLocation = startGeocode.geometry.location;
   console.log(startLocation)
-  
+
   const nearestStation = await getNearestStation(startGeocode.geometry.location);
+  console.log("nearest station:");
+  console.log(nearestStation)
+  */
+  
+  const startLocation = await getCurrentGeocode();
+  console.log(startLocation)
+
+  const nearestStation = await getNearestStation(startLocation);
   console.log("nearest station:");
   console.log(nearestStation)
   
