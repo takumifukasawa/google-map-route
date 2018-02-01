@@ -76,7 +76,7 @@ async function getCurrentGeocode() {
 async function searchRoute() {
   console.log("--- search start ---");
 
-  /*
+  /* 入力した地点から取得する場合
   const startKeyword = startInput.value;
   console.log("start keyword:");
   console.log(startKeyword)
@@ -111,9 +111,7 @@ const map = new google.maps.Map(document.getElementById('map'), {
 });
 directionsDisplay.setMap(map);
 
-const onChangeHandler = () => {
+startInput.addEventListener('click', () => {
   searchRoute();
-};
-startInput.addEventListener('change', onChangeHandler);
-
+});
 

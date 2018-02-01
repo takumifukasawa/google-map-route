@@ -2296,7 +2296,7 @@ var searchRoute = function () {
           case 0:
             console.log("--- search start ---");
 
-            /*
+            /* 入力した地点から取得する場合
             const startKeyword = startInput.value;
             console.log("start keyword:");
             console.log(startKeyword)
@@ -2363,9 +2363,8 @@ var map = new google.maps.Map(document.getElementById('map'), {
 });
 directionsDisplay.setMap(map);
 
-var onChangeHandler = function onChangeHandler() {
+startInput.addEventListener('click', function () {
   searchRoute();
-};
-startInput.addEventListener('change', onChangeHandler);
+});
 
 },{"babel-runtime/core-js/promise":1,"babel-runtime/helpers/asyncToGenerator":2,"babel-runtime/regenerator":3}]},{},[75]);
