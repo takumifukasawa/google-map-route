@@ -2363,8 +2363,9 @@ var map = new google.maps.Map(document.getElementById('map'), {
 });
 directionsDisplay.setMap(map);
 
-startInput.addEventListener('click', function () {
-  searchRoute();
-});
+//startInput.addEventListener('click', () => {
+//});
+
+searchRoute();
 
 },{"babel-runtime/core-js/promise":1,"babel-runtime/helpers/asyncToGenerator":2,"babel-runtime/regenerator":3}]},{},[75]);
