@@ -1,4 +1,6 @@
 
+import googleMapStyleJSON from './googleMapStyleJSON';
+
 const targetPlace = {
   lat: 35.648202,
   lng: 139.70149,
@@ -108,6 +110,7 @@ async function searchRoute() {
 const map = new google.maps.Map(document.getElementById('map'), {
   zoom: 17,
   center: targetPlace,
+  styles: googleMapStyleJSON
 });
 directionsDisplay.setMap(map);
 
