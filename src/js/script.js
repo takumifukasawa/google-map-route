@@ -1,6 +1,8 @@
 
 import googleMapStyleJSON from './googleMapStyleJSON';
 
+const API_KEY = 'AIzaSyC5EQCdj7DdSu1QGFVh6FUDU78j3SCPk3E';
+
 const targetPlace = {
   lat: 35.648202,
   lng: 139.70149,
@@ -75,6 +77,25 @@ async function getCurrentGeocode() {
   });
 }
 
+async function getRoute(origins, destinations) {
+  const service = new google.maps.DistanceMatrixService();
+  const opts = {
+    origins: [{ lat: origins.lat, lng: origins.lng }],
+    destinations: [ { lat: destinations.lat(), lng: destinations.lng() } ],
+    travelMode: "WALKING",
+  };
+  
+  return new Promise(resolve => {
+    service.getDistanceMatrix(opts, (response, status) => {
+      if(status != "OK") {
+        console.log("get route error");
+        return;
+      }
+      resolve(response.rows[0].elements[0]);
+    });
+  });
+}
+
 async function searchRoute() {
   console.log("--- search start ---");
 
@@ -103,7 +124,11 @@ async function searchRoute() {
   console.log(nearestStation)
   
   calculateAndDisplayRoute(startLocation, nearestStation.geometry.location, "WALKING");
-  
+ 
+  const routeInfo = await getRoute(startLocation, nearestStation.geometry.location);
+  const routeMinutesText = routeInfo.duration.text;
+  console.log(`所要時間: ${routeMinutesText}`);
+
   console.log("--- search end ---");
 }
 
