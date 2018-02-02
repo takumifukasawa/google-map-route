@@ -2149,6 +2149,9 @@ if (hadRuntime) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+// https://mapstyle.withgoogle.com/
+
 exports.default = [{
   "elementType": "geometry",
   "stylers": [{
