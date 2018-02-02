@@ -2458,12 +2458,48 @@ var getCurrentGeocode = function () {
   };
 }();
 
-var searchRoute = function () {
-  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
-    var startLocation, nearestStation;
+var getRoute = function () {
+  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(origins, destinations) {
+    var service, opts;
     return _regenerator2.default.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
+          case 0:
+            service = new google.maps.DistanceMatrixService();
+            opts = {
+              origins: [{ lat: origins.lat, lng: origins.lng }],
+              destinations: [{ lat: destinations.lat(), lng: destinations.lng() }],
+              travelMode: "WALKING"
+            };
+            return _context5.abrupt('return', new _promise2.default(function (resolve) {
+              service.getDistanceMatrix(opts, function (response, status) {
+                if (status != "OK") {
+                  console.log("get route error");
+                  return;
+                }
+                resolve(response.rows[0].elements[0]);
+              });
+            }));
+
+          case 3:
+          case 'end':
+            return _context5.stop();
+        }
+      }
+    }, _callee5, this);
+  }));
+
+  return function getRoute(_x7, _x8) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+var searchRoute = function () {
+  var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
+    var startLocation, nearestStation, routeInfo, routeMinutesText;
+    return _regenerator2.default.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             console.log("--- search start ---");
 
@@ -2482,37 +2518,46 @@ var searchRoute = function () {
             console.log(nearestStation)
             */
 
-            _context5.next = 3;
+            _context6.next = 3;
             return getCurrentGeocode();
 
           case 3:
-            startLocation = _context5.sent;
+            startLocation = _context6.sent;
 
             console.log(startLocation);
 
-            _context5.next = 7;
+            _context6.next = 7;
             return getNearestStation(startLocation);
 
           case 7:
-            nearestStation = _context5.sent;
+            nearestStation = _context6.sent;
 
             console.log("nearest station:");
             console.log(nearestStation);
 
             calculateAndDisplayRoute(startLocation, nearestStation.geometry.location, "WALKING");
 
+            _context6.next = 13;
+            return getRoute(startLocation, nearestStation.geometry.location);
+
+          case 13:
+            routeInfo = _context6.sent;
+            routeMinutesText = routeInfo.duration.text;
+
+            console.log('\u6240\u8981\u6642\u9593: ' + routeMinutesText);
+
             console.log("--- search end ---");
 
-          case 12:
+          case 17:
           case 'end':
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5, this);
+    }, _callee6, this);
   }));
 
   return function searchRoute() {
-    return _ref5.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 
@@ -2521,6 +2566,8 @@ var _googleMapStyleJSON = require('./googleMapStyleJSON');
 var _googleMapStyleJSON2 = _interopRequireDefault(_googleMapStyleJSON);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var API_KEY = 'AIzaSyC5EQCdj7DdSu1QGFVh6FUDU78j3SCPk3E';
 
 var targetPlace = {
   lat: 35.648202,
