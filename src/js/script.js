@@ -135,7 +135,7 @@ async function searchRoute() {
 const map = new google.maps.Map(document.getElementById('map'), {
   zoom: 17,
   center: targetPlace,
-  styles: googleMapStyleJSON
+  styles: googleMapStyleJSON,
 });
 directionsDisplay.setMap(map);
 
