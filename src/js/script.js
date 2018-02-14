@@ -1,5 +1,6 @@
 
 import googleMapStyleJSON from './googleMapStyleJSON';
+import GoogleMapOverlay from './GoogleMapOverlay';
 
 const API_KEY = 'AIzaSyC5EQCdj7DdSu1QGFVh6FUDU78j3SCPk3E';
 
@@ -12,6 +13,20 @@ const directionsService = new google.maps.DirectionsService;
 const directionsDisplay = new google.maps.DirectionsRenderer;
 
 const startInput = document.getElementById('start');
+
+const map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 17,
+  center: targetPlace,
+  styles: googleMapStyleJSON,
+});
+directionsDisplay.setMap(map);
+
+startInput.addEventListener('click', () => {
+  searchRoute();
+});
+
+searchRoute();
+
 
 async function calculateAndDisplayRoute(origin, destination, travelMode) {
   return new Promise((resolve, reject) => {
@@ -119,6 +134,37 @@ async function searchRoute() {
   const startLocation = await getCurrentGeocode();
   console.log(startLocation)
 
+  const centerOffset = {
+    lat: -0.00019,
+    lng: 0.00036
+  };
+
+  const overlayOffset = {
+    lat: 0.002,
+    lng: 0.00247
+  };
+
+  const overlayBounds = {
+    sw: {
+      lat: startLocation.lat + centerOffset.lat - overlayOffset.lat,
+      lng: startLocation.lng + centerOffset.lng - overlayOffset.lng,
+    },
+    ne: {
+      lat: startLocation.lat + centerOffset.lat + overlayOffset.lat,
+      lng: startLocation.lng + centerOffset.lng + overlayOffset.lng,
+    },
+  };
+
+  const overlay = new GoogleMapOverlay({
+    bounds: new google.maps.LatLngBounds(
+      new google.maps.LatLng(overlayBounds.sw.lat, overlayBounds.sw.lng),
+      new google.maps.LatLng(overlayBounds.ne.lat, overlayBounds.ne.lng),
+    ),
+    image: "./assets/images/target.png",
+    map,
+  })
+
+
   const nearestStation = await getNearestStation(startLocation);
   console.log("nearest station:");
   console.log(nearestStation)
@@ -132,16 +178,4 @@ async function searchRoute() {
   console.log("--- search end ---");
 }
 
-const map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 17,
-  center: targetPlace,
-  styles: googleMapStyleJSON,
-});
-directionsDisplay.setMap(map);
-
-startInput.addEventListener('click', () => {
-  searchRoute();
-});
-  
-searchRoute();
 
