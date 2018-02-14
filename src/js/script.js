@@ -134,14 +134,16 @@ async function searchRoute() {
   const startLocation = await getCurrentGeocode();
   console.log(startLocation)
 
+  const overlaySize = 1;
+
   const centerOffset = {
     lat: -0.00019,
     lng: 0.00036
   };
 
   const overlayOffset = {
-    lat: 0.002,
-    lng: 0.00247
+    lat: 0.002 * overlaySize,
+    lng: 0.00247 * overlaySize
   };
 
   const overlayBounds = {

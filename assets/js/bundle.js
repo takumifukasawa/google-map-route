@@ -3198,7 +3198,7 @@ var getRoute = function () {
 
 var searchRoute = function () {
   var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
-    var startLocation, centerOffset, overlayOffset, overlayBounds, overlay, nearestStation, routeInfo, routeMinutesText;
+    var startLocation, overlaySize, centerOffset, overlayOffset, overlayBounds, overlay, nearestStation, routeInfo, routeMinutesText;
     return _regenerator2.default.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
@@ -3228,13 +3228,14 @@ var searchRoute = function () {
 
             console.log(startLocation);
 
+            overlaySize = 1;
             centerOffset = {
               lat: -0.00019,
               lng: 0.00036
             };
             overlayOffset = {
-              lat: 0.002,
-              lng: 0.00247
+              lat: 0.002 * overlaySize,
+              lng: 0.00247 * overlaySize
             };
             overlayBounds = {
               sw: {
@@ -3251,10 +3252,10 @@ var searchRoute = function () {
               image: "./assets/images/target.png",
               map: map
             });
-            _context6.next = 11;
+            _context6.next = 12;
             return getNearestStation(startLocation);
 
-          case 11:
+          case 12:
             nearestStation = _context6.sent;
 
             console.log("nearest station:");
@@ -3262,10 +3263,10 @@ var searchRoute = function () {
 
             calculateAndDisplayRoute(startLocation, nearestStation.geometry.location, "WALKING");
 
-            _context6.next = 17;
+            _context6.next = 18;
             return getRoute(startLocation, nearestStation.geometry.location);
 
-          case 17:
+          case 18:
             routeInfo = _context6.sent;
             routeMinutesText = routeInfo.duration.text;
 
@@ -3273,7 +3274,7 @@ var searchRoute = function () {
 
             console.log("--- search end ---");
 
-          case 21:
+          case 22:
           case 'end':
             return _context6.stop();
         }
