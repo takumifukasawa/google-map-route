@@ -2813,6 +2813,8 @@ var GoogleMapOverlay = function (_google$maps$OverlayV) {
       div.style.borderWidth = "0px";
       div.style.position = "absolute";
 
+      div.style.transition = "opacity 1s";
+
       var img = document.createElement("img");
       img.src = this.image_;
       img.style.width = "100%";
@@ -2834,10 +2836,12 @@ var GoogleMapOverlay = function (_google$maps$OverlayV) {
       var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
 
       var div = this.div_;
-      div.style.left = sw.x + 'px';
-      div.style.top = ne.y + 'px';
-      div.style.width = ne.x - sw.x + 'px';
-      div.style.height = sw.y - ne.y + 'px';
+      div.style.left = sw.x + "px";
+      div.style.top = ne.y + "px";
+      div.style.width = ne.x - sw.x + "px";
+      div.style.height = sw.y - ne.y + "px";
+
+      console.log("draw");
     }
   }]);
   return GoogleMapOverlay;
@@ -3229,13 +3233,25 @@ var searchRoute = function () {
             console.log(startLocation);
 
             overlaySize = 1;
-            centerOffset = {
+
+            /*
+            const centerOffset = {
               lat: -0.00019,
               lng: 0.00036
             };
-            overlayOffset = {
+             const overlayOffset = {
               lat: 0.002 * overlaySize,
               lng: 0.00247 * overlaySize
+            };
+            */
+
+            centerOffset = {
+              lat: 0,
+              lng: 0
+            };
+            overlayOffset = {
+              lat: 0 * overlaySize,
+              lng: 0 * overlaySize
             };
             overlayBounds = {
               sw: {

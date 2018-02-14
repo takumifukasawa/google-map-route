@@ -136,6 +136,7 @@ async function searchRoute() {
 
   const overlaySize = 1;
 
+  /*
   const centerOffset = {
     lat: -0.00019,
     lng: 0.00036
@@ -145,6 +146,19 @@ async function searchRoute() {
     lat: 0.002 * overlaySize,
     lng: 0.00247 * overlaySize
   };
+  */
+
+
+  const centerOffset = {
+    lat: 0,
+    lng: 0
+  };
+
+  const overlayOffset = {
+    lat: 0 * overlaySize,
+    lng: 0 * overlaySize
+  };
+
 
   const overlayBounds = {
     sw: {

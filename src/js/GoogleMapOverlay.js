@@ -18,6 +18,8 @@ export default class GoogleMapOverlay extends google.maps.OverlayView {
     div.style.borderWidth = "0px";
     div.style.position = "absolute";
 
+    div.style.transition = "opacity 1s"
+
     const img = document.createElement("img");
     img.src = this.image_;
     img.style.width = "100%";
@@ -38,9 +40,11 @@ export default class GoogleMapOverlay extends google.maps.OverlayView {
     const ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
 
     const div = this.div_;
-    div.style.left = sw.x + 'px';
-    div.style.top = ne.y + 'px';
-    div.style.width = (ne.x - sw.x) + 'px';
-    div.style.height = (sw.y - ne.y) + 'px';
+    div.style.left = `${sw.x}px`;
+    div.style.top = `${ne.y}px`;
+    div.style.width = `${ne.x - sw.x}px`;
+    div.style.height = `${sw.y - ne.y}px`;
+
+    console.log("draw");
   }
 }

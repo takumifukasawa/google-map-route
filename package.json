@@ -7,7 +7,7 @@
     "start": "yarn build & yarn serve",
     "build": "yarn build:js; wait",
     "build:js": "watchify ./src/js/script.js -o ./assets/js/bundle.js -v",
-    "serve": "browser-sync start --server ./ --files \"./index.html,./assets/js/bundle.js\""
+    "serve": "browser-sync start --https true --server ./ --files \"./index.html,./assets/js/bundle.js\""
   },
   "dependencies": {
     "babel-core": "^6.26.0",
