@@ -3234,24 +3234,17 @@ var searchRoute = function () {
 
             overlaySize = 1;
 
-            /*
-            const centerOffset = {
-              lat: -0.00019,
-              lng: 0.00036
-            };
-             const overlayOffset = {
-              lat: 0.002 * overlaySize,
-              lng: 0.00247 * overlaySize
-            };
-            */
+            // TODO: なんか場所によってずれる？
 
             centerOffset = {
+              // lat: -0.00019,
+              // lng: 0.00036
               lat: 0,
               lng: 0
             };
             overlayOffset = {
               lat: 0.002 * overlaySize,
-              lng: 0.002 * overlaySize
+              lng: 0.00247 * overlaySize
             };
             overlayBounds = {
               sw: {

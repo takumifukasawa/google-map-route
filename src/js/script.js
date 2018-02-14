@@ -136,27 +136,17 @@ async function searchRoute() {
 
   const overlaySize = 1;
 
-  /*
+  // TODO: なんか場所によってずれる？
   const centerOffset = {
-    lat: -0.00019,
-    lng: 0.00036
-  };
-
-  const overlayOffset = {
-    lat: 0.002 * overlaySize,
-    lng: 0.00247 * overlaySize
-  };
-  */
-
-
-  const centerOffset = {
+    // lat: -0.00019,
+    // lng: 0.00036
     lat: 0,
     lng: 0
   };
 
   const overlayOffset = {
     lat: 0.002 * overlaySize,
-    lng: 0.002 * overlaySize
+    lng: 0.00247 * overlaySize
   };
 
 
