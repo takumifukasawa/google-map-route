@@ -155,8 +155,8 @@ async function searchRoute() {
   };
 
   const overlayOffset = {
-    lat: 0 * overlaySize,
-    lng: 0 * overlaySize
+    lat: 0.002 * overlaySize,
+    lng: 0.002 * overlaySize
   };
 
 
